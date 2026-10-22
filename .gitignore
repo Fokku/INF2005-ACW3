@@ -1,0 +1,13 @@
+# Lab secrets / local overrides
+lab/.env
+# Build + runtime artefacts
+**/*.log
+report/*~$*
+report/~$*
+.DS_Store
+# Screenshots captured during the demo (kept out of VCS; attach to the report)
+report/screenshots/
+
+# Python bytecode
+__pycache__/
+*.pyc
