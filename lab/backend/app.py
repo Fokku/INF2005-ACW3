@@ -13,7 +13,8 @@ transcoding partly succeeds then fails - the condition that reaches the
 vulnerable code path - is intentionally NOT included here; constructing it is
 the exploitation-phase task described in docs/03-exploitation-scaffold.md.
 
-Standard library only, so the backend image is just python:3-slim.
+Standard library only, so the backend image is just a slim python base (see
+backend/Dockerfile, python:3.12-slim) with no extra packages.
 """
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer

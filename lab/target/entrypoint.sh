@@ -14,6 +14,8 @@ DAV_USER="${DAV_USER:-davuser}"
 DAV_PASS="${DAV_PASS:-LabPass123}"
 DIGEST_USER="${DIGEST_USER:-digestuser}"
 DIGEST_PASS="${DIGEST_PASS:-LabPass123}"
+# The realm must equal AuthName in the httpd config: the digest HA1 below is
+# keyed on it, so a mismatch makes every digest login fail.
 DIGEST_REALM="${DIGEST_REALM:-ACW3 Restricted}"
 
 echo "[entrypoint] httpd ${HTTPD_VERSION:-?}  config=${CONF}"

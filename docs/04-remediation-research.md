@@ -19,10 +19,11 @@ All three are fixed by the same upgrade.
 **Root cause.** An integer overflow in `mod_dav_fs` when handling WebDAV
 `PROPPATCH` requests that declare an excessive number of XML namespaces. An
 authenticated WebDAV client with write access can crash worker processes and
-permanently damage the directory's property database (integrity + availability).
+permanently damage the directory's property database. The NVD 8.8 vector rates
+all three impacts High (`C:H/I:H/A:H`); the directly demonstrable effect is the
+worker crash and property-DB corruption (integrity + availability).
 
-**Primary remediation.** Upgrade to httpd 2.4.69 (fix committed in the 2.4.x
-branch as r1938682).
+**Primary remediation.** Upgrade to httpd 2.4.69.
 
 **Config-level mitigation / defence-in-depth.**
 - Disable `mod_dav_fs` (and `mod_dav`) entirely if WebDAV is not required —
