@@ -1,0 +1,8 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 207 Multi-Status
+Date: Mon, 26 Oct 2026 16:15:09 GMT
+Server: Apache/2.4.68 (Unix)
+Transfer-Encoding: chunked
+Content-Type: text/xml; charset="utf-8"
+

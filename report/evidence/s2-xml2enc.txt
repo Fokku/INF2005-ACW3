@@ -1,0 +1,46 @@
+# Scenario 2 — CVE-2026-63686 · mod_xml2enc conversion-failure DoS
+# target: http://127.0.0.1:8080/proxy/   (2026-10-26 16:12 UTC)
+
+## 4.2 Rebuild backend (partial-fail mode), restart target, wait for readiness
+proxy readiness: ready (GET /proxy/ = 200 after 1s)
+
+## 4.1 Preconditions: proxy_html + xml2enc loaded, ProxyHTMLEnable On
+$ docker exec acw3-target httpd -M -f conf/lab-vuln.conf 2>/dev/null | grep -E 'proxy_html|xml2enc'
+ xml2enc_module (shared)
+ proxy_html_module (shared)
+$ docker exec acw3-target grep -n ProxyHTMLEnable /usr/local/apache2/conf/lab-vuln.conf
+121:    ProxyHTMLEnable  On
+
+httpd worker processes before trigger: 4
+
+## 4.3 Benign control (valid windows-1252, converts fine)
+Benign control HTTP status: 200
+  body contains 'ACW3 backend': 1
+
+## 4.4 Trigger: declared charset windows-1252 with invalid 0x81 byte mid-stream
+$ curl -v 'http://127.0.0.1:8080/proxy/scenario?charset=windows-1252&mode=partial-fail'
+Trigger client result (HTTP code / curl error): 200
+trigger response body size: 124 bytes
+returned body (tail, hex) — backend sent a lone 0x81; note it is absent here:
+   43 57 33 20 62 61 63 6b 65 6e 64 3c 2f 68 31 3e
+   3c 70 3e 76 61 6c 69 64 20 63 6f 6e 76 65 72 74
+   65 64 20 70 72 65 66 69 78 3c 2f 70 3e 3c 2f 62
+   6f 64 79 3e 3c 2f 68 74 6d 6c 3e 0a
+  (0x81 count in returned body: 0)
+
+## Server-side evidence (a worker crash/exit is the DoS proof; a 5xx alone is not)
+worker-crash indicators in target log (segfault/AH00052/exit signal): 0
+xml2enc / conversion-related log lines for this run:
+  acw3-target  | [Mon Oct 26 16:11:48.173923 2026] [xml2enc:error] [pid 17:tid 29] [client 172.30.0.1:45554] AH01444: Skipping invalid byte(s) in input stream!
+  acw3-target  | [Mon Oct 26 16:11:48.265823 2026] [xml2enc:info] [pid 19:tid 44] [client 172.30.0.1:45570] AH01431: Got charset utf-8 from HTTP headers
+  acw3-target  | [Mon Oct 26 16:12:43.728552 2026] [xml2enc:info] [pid 16:tid 20] [client 172.30.0.1:37550] AH01431: Got charset utf-8 from HTTP headers
+  acw3-target  | [Mon Oct 26 16:12:43.860097 2026] [xml2enc:info] [pid 17:tid 24] [client 172.30.0.1:37560] AH01431: Got charset windows-1252 from HTTP headers
+  acw3-target  | [Mon Oct 26 16:12:43.874169 2026] [xml2enc:info] [pid 17:tid 28] [client 172.30.0.1:37568] AH01431: Got charset windows-1252 from HTTP headers
+  acw3-target  | [Mon Oct 26 16:12:43.874257 2026] [xml2enc:error] [pid 17:tid 28] [client 172.30.0.1:37568] AH01444: Skipping invalid byte(s) in input stream!
+httpd worker processes after trigger: 4  (was 4)
+proxy still serving after trigger? 200
+
+## Verdict
+  => NO worker crash. Stock Apache 2.4.68 handled the invalid 0x81 byte in
+     the windows-1252 -> UTF-8 transcode WITHOUT a NULL-deref/DoS (the filter
+     engaged but failed safe). The CVE-2026-63686 crash effect did NOT reproduce.

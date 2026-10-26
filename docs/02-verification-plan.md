@@ -7,7 +7,7 @@ the demo — a failed verification step here is far cheaper to fix than a failed
 exploit in front of the instructor.
 
 Run everything from the host, or from the Kali box
-(`docker compose exec attacker bash`, then use `http://172.28.0.10/` instead of
+(`docker compose exec attacker bash`, then use `http://172.30.0.10/` instead of
 `http://127.0.0.1:8080/`).
 
 ## 0. One-command check
@@ -65,7 +65,7 @@ curl -s -o /dev/null -w '%{http_code}\n' -X PROPFIND http://127.0.0.1:8080/webda
 ```
 
 From Kali you can also browse the collection interactively:
-`cadaver http://172.28.0.10/webdav/` (login `davuser` / `LabPass123`).
+`cadaver http://172.30.0.10/webdav/` (login `davuser` / `LabPass123`).
 
 **Present & reachable when:** DAV header present, authenticated PROPFIND = 207,
 PROPPATCH is therefore available to the authenticated user — that PROPPATCH path

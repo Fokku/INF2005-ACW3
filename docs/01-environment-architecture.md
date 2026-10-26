@@ -61,7 +61,7 @@ build argument.
 
 ## 3. Network layout & IP / port plan
 
-A single isolated Docker bridge network, `acwnet` (`172.28.0.0/24`). The target's
+A single isolated Docker bridge network, `acwnet` (`172.30.0.0/24`). The target's
 web port is published to the host **loopback only** (`127.0.0.1`), so nothing is
 reachable from the LAN.
 
@@ -70,30 +70,30 @@ reachable from the LAN.
           127.0.0.1:8080 ─┐        127.0.0.1:8081 ─┐ (remediation profile)
                           │                         │
    ┌──────────────────────┼─────────────────────────┼───────────────────────┐
-   │  docker network: acwnet   172.28.0.0/24  (bridge, gw 172.28.0.1)         │
+   │  docker network: acwnet   172.30.0.0/24  (bridge, gw 172.30.0.1)         │
    │                      │                         │                         │
    │   ┌──────────────────▼───────┐     ┌───────────▼──────────────┐          │
-   │   │ target  172.28.0.10       │     │ target-patched 172.28.0.11│          │
+   │   │ target  172.30.0.10       │     │ target-patched 172.30.0.11│          │
    │   │ httpd 2.4.68 (VULN) :80   │     │ httpd 2.4.69 (FIXED) :80  │          │
    │   │  /webdav  /digest  /proxy │     │  hardened config          │          │
    │   └──────────┬────────────────┘     └───────────┬──────────────┘          │
    │              │ proxies /proxy/ ──────────────────┤                        │
    │   ┌──────────▼───────────────┐                   │                        │
-   │   │ backend 172.28.0.20 :8000 │◄──────────────────┘                        │
+   │   │ backend 172.30.0.20 :8000 │◄──────────────────┘                        │
    │   │ untrusted backend fixture │  (internal only — no host port)           │
    │   └───────────────────────────┘                                           │
    │   ┌───────────────────────────┐                                           │
-   │   │ attacker 172.28.0.100      │  Kali — docker compose exec attacker bash │
+   │   │ attacker 172.30.0.100      │  Kali — docker compose exec attacker bash │
    │   └───────────────────────────┘                                           │
    └───────────────────────────────────────────────────────────────────────────┘
 ```
 
 | Host / service | IP | Container port | Host mapping | Role |
 |----------------|----|----------------|--------------|------|
-| `target` | 172.28.0.10 | 80 | `127.0.0.1:8080` | Vulnerable httpd 2.4.68 (all 3 scenarios) |
-| `backend` | 172.28.0.20 | 8000 | *(none — internal)* | Untrusted backend for the proxy scenario |
-| `attacker` | 172.28.0.100 | — | — | Kali assessment workstation |
-| `target-patched` | 172.28.0.11 | 80 | `127.0.0.1:8081` | Patched httpd 2.4.69 (remediation demo) |
+| `target` | 172.30.0.10 | 80 | `127.0.0.1:8080` | Vulnerable httpd 2.4.68 (all 3 scenarios) |
+| `backend` | 172.30.0.20 | 8000 | *(none — internal)* | Untrusted backend for the proxy scenario |
+| `attacker` | 172.30.0.100 | — | — | Kali assessment workstation |
+| `target-patched` | 172.30.0.11 | 80 | `127.0.0.1:8081` | Patched httpd 2.4.69 (remediation demo) |
 
 Scenario endpoints on the target (path-based, port 80):
 
@@ -150,7 +150,7 @@ docker exec acw3-target httpd -M | grep -E 'dav|digest|xml2enc|proxy_html'
 
 ## 5. Attacker box — container vs VM
 
-The compose file ships a **Kali container** (`attacker`, 172.28.0.100) so the whole
+The compose file ships a **Kali container** (`attacker`, 172.30.0.100) so the whole
 lab is reproducible with one command and already sits on `acwnet`. Enter it with
 `docker compose exec attacker bash` (or `make attacker`). It carries a focused
 tool set (curl, cadaver/davtest, python3-requests, nmap, nikto); add anything

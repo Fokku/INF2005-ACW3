@@ -1,0 +1,116 @@
+
+== Target reachability & version banner ==
+  <no Server header>
+  [ FAIL ] target not reachable at http://127.0.0.1:8080
+  [ FAIL ] version banner is not 2.4.68 (check build arg)
+
+== Assessed modules loaded (httpd -M inside acw3-target) ==
+  [ FAIL ] could not run 'httpd -M' in acw3-target (is it running?)
+
+== Scenario 1 - WebDAV reachable (CVE-2026-93546) ==
+  [ FAIL ] no DAV header - WebDAV not active
+  [ FAIL ] PROPFIND returned 000 (expected 207)
+  [ FAIL ] unauthenticated PROPFIND returned 000 (expected 401)
+
+== Scenario 2 - Digest auth reachable (CVE-2026-73636) ==
+  <none>
+  [ FAIL ] no Digest challenge
+  [ FAIL ] no nonce in challenge
+  [ FAIL ] digest auth returned 000 (expected 200)
+
+== Scenario 3 - Proxy + xml2enc filter reachable (CVE-2026-63686) ==
+  [ FAIL ] backend content not served via /proxy/ (proxy or backend down)
+
+== Summary ==
+  0 passed, 10 failed
+  One or more checks failed - see docs/02-verification-plan.md.
+
+== Target reachability & version banner ==
+  Server: Apache/2.4.68 (Unix)
+  [ PASS ] target responds and is Apache
+  [ PASS ] version banner is 2.4.68
+
+== Assessed modules loaded (httpd -M inside acw3-target) ==
+  [ FAIL ] module dav_module NOT loaded
+  [ FAIL ] module dav_fs_module NOT loaded
+  [ FAIL ] module auth_digest_module NOT loaded
+  [ FAIL ] module xml2enc_module NOT loaded
+  [ FAIL ] module proxy_html_module NOT loaded
+
+== Scenario 1 - WebDAV reachable (CVE-2026-93546) ==
+  [ PASS ] OPTIONS advertises DAV capability
+  [ PASS ] authenticated PROPFIND returns 207 Multi-Status
+  [ PASS ] unauthenticated access is gated (401)
+
+== Scenario 2 - Digest auth reachable (CVE-2026-73636) ==
+  WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="AAAAAAAAAAA=b9dc94431ce04de969bc5e798126c38658afab64", algorithm=MD5, opaque="1", qop="auth"
+  [ PASS ] challenge is Digest (mod_auth_digest active)
+  [ PASS ] server issues a nonce
+  [ PASS ] valid digest credentials authenticate (200)
+
+== Scenario 3 - Proxy + xml2enc filter reachable (CVE-2026-63686) ==
+  [ PASS ] reverse proxy serves the backend through the filter chain
+
+== Summary ==
+  9 passed, 5 failed
+  One or more checks failed - see docs/02-verification-plan.md.
+
+== Target reachability & version banner ==
+  Server: Apache/2.4.68 (Unix)
+  [ PASS ] target responds and is Apache
+  [ PASS ] version banner is 2.4.68
+
+== Assessed modules loaded (httpd -M -f conf/lab-vuln.conf inside acw3-target) ==
+  [ PASS ] module dav_module loaded
+  [ PASS ] module dav_fs_module loaded
+  [ PASS ] module auth_digest_module loaded
+  [ PASS ] module xml2enc_module loaded
+  [ PASS ] module proxy_html_module loaded
+
+== Scenario 1 - WebDAV reachable (CVE-2026-93546) ==
+  [ PASS ] OPTIONS advertises DAV capability
+  [ PASS ] authenticated PROPFIND returns 207 Multi-Status
+  [ PASS ] unauthenticated access is gated (401)
+
+== Scenario 2 - Digest auth reachable (CVE-2026-73636) ==
+  WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="AwAAAAAAAAA=cf30b3404e594ec0025b9d5d627e3ae0adcdfbf2", algorithm=MD5, opaque="3", qop="auth"
+  [ PASS ] challenge is Digest (mod_auth_digest active)
+  [ PASS ] server issues a nonce
+  [ PASS ] valid digest credentials authenticate (200)
+
+== Scenario 3 - Proxy + xml2enc filter reachable (CVE-2026-63686) ==
+  [ PASS ] reverse proxy serves the backend through the filter chain
+
+== Summary ==
+  14 passed, 0 failed
+  Lab verified - ready for the exploitation phase.
+
+== Target reachability & version banner ==
+  Server: Apache/2.4.68 (Unix)
+  [ PASS ] target responds and is Apache
+  [ PASS ] version banner is 2.4.68
+
+== Assessed modules loaded (httpd -M -f conf/lab-vuln.conf inside acw3-target) ==
+  [ PASS ] module dav_module loaded
+  [ PASS ] module dav_fs_module loaded
+  [ PASS ] module auth_digest_module loaded
+  [ PASS ] module xml2enc_module loaded
+  [ PASS ] module proxy_html_module loaded
+
+== Scenario 1 - WebDAV reachable (CVE-2026-93546) ==
+  [ PASS ] OPTIONS advertises DAV capability
+  [ PASS ] authenticated PROPFIND returns 207 Multi-Status
+  [ PASS ] unauthenticated access is gated (401)
+
+== Scenario 2 - Digest auth reachable (CVE-2026-73636) ==
+  WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="BgAAAAAAAAA=4d3c7a9ad6702c2ab87f8608406f7f1503b307a1", algorithm=MD5, opaque="5", qop="auth"
+  [ PASS ] challenge is Digest (mod_auth_digest active)
+  [ PASS ] server issues a nonce
+  [ PASS ] valid digest credentials authenticate (200)
+
+== Scenario 3 - Proxy + xml2enc filter reachable (CVE-2026-63686) ==
+  [ PASS ] reverse proxy serves the backend through the filter chain
+
+== Summary ==
+  14 passed, 0 failed
+  Lab verified - ready for the exploitation phase.

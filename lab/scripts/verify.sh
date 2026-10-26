@@ -34,8 +34,13 @@ echo "${banner}" | grep -q "${EXPECT_VERSION}" \
     || bad "version banner is not ${EXPECT_VERSION} (check build arg)"
 
 # --- Loaded modules (authoritative presence check) ---------------------------
-hdr "Assessed modules loaded (httpd -M inside ${CONTAINER})"
-mods=$(docker exec "${CONTAINER}" httpd -M 2>/dev/null)
+# NOTE: list modules under the SAME config the container actually started with
+# (entrypoint runs `httpd -f conf/${LAB_CONF}`). A bare `httpd -M` would read the
+# default httpd.conf instead and miss every lab module.
+lab_conf=$(docker exec "${CONTAINER}" printenv LAB_CONF 2>/dev/null)
+lab_conf="${lab_conf:-lab-vuln.conf}"
+hdr "Assessed modules loaded (httpd -M -f conf/${lab_conf} inside ${CONTAINER})"
+mods=$(docker exec "${CONTAINER}" httpd -M -f "conf/${lab_conf}" 2>/dev/null)
 if [ -z "${mods}" ]; then
     bad "could not run 'httpd -M' in ${CONTAINER} (is it running?)"
 else

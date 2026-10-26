@@ -1,10 +1,10 @@
 # =============================================================================
 # INF2005 ACW3 - lab topology
 # -----------------------------------------------------------------------------
-#   target          httpd 2.4.68  (VULNERABLE)   172.28.0.10   host :8080 -> :80
-#   backend         untrusted backend fixture    172.28.0.20   (internal only)
-#   attacker        Kali assessment box          172.28.0.100
-#   target-patched  httpd 2.4.69  (REMEDIATED)   172.28.0.11   host :8081 -> :80
+#   target          httpd 2.4.68  (VULNERABLE)   172.30.0.10   host :8080 -> :80
+#   backend         untrusted backend fixture    172.30.0.20   (internal only)
+#   attacker        Kali assessment box          172.30.0.100
+#   target-patched  httpd 2.4.69  (REMEDIATED)   172.30.0.11   host :8081 -> :80
 #                   (only starts with:  docker compose --profile remediation up)
 #
 # Single isolated bridge network, no exposure beyond the host loopback mapping.
@@ -30,7 +30,7 @@ services:
       - "127.0.0.1:8080:80"      # bound to loopback only
     networks:
       acwnet:
-        ipv4_address: 172.28.0.10
+        ipv4_address: 172.30.0.10
     depends_on:
       - backend
     restart: "no"
@@ -42,7 +42,7 @@ services:
     container_name: acw3-backend
     networks:
       acwnet:
-        ipv4_address: 172.28.0.20
+        ipv4_address: 172.30.0.20
     expose:
       - "8000"                   # reachable only inside acwnet (by target)
     restart: "no"
@@ -54,7 +54,7 @@ services:
     container_name: acw3-attacker
     networks:
       acwnet:
-        ipv4_address: 172.28.0.100
+        ipv4_address: 172.30.0.100
     cap_add:
       - NET_RAW                  # allow ping / nmap raw sockets inside the lab
     tty: true
@@ -79,7 +79,7 @@ services:
       - "127.0.0.1:8081:80"
     networks:
       acwnet:
-        ipv4_address: 172.28.0.11
+        ipv4_address: 172.30.0.11
     depends_on:
       - backend
     profiles:
@@ -92,5 +92,5 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.28.0.0/24
-          gateway: 172.28.0.1
+        - subnet: 172.30.0.0/24
+          gateway: 172.30.0.1

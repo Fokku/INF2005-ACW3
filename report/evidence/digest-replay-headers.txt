@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Mon, 26 Oct 2026 16:07:54 GMT
+Server: Apache/2.4.68 (Unix)
+Authentication-Info: rspauth="9e79b731185cedba9e9e2af9bd0e1bc4", cnonce="f7MW1ADbxXsglEBF", nc=00000001, qop=auth
+Last-Modified: Mon, 26 Oct 2026 16:06:42 GMT
+ETag: "46-65ec084116af3"
+Accept-Ranges: bytes
+Content-Length: 70
+Content-Type: text/html
+

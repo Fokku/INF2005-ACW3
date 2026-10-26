@@ -60,10 +60,23 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/scenario":
             qs = parse_qs(parsed.query)
             charset = qs.get("charset", ["utf-8"])[0]
-            # keep it to a sane token so the fixture stays a benign test harness
-            charset = "".join(c for c in charset if c.isalnum() or c in "-_.")[:40] or "utf-8"
-            self._send(SAMPLE_HTML.encode("utf-8"),
-                       f"text/html; charset={charset}")
+            charset = "".join(
+                c for c in charset if c.isalnum() or c in "-_."
+            )[:40] or "utf-8"
+
+            if qs.get("mode", ["benign"])[0] == "partial-fail":
+                # ASCII/Windows-1252-compatible prefix converts first.
+                # 0x81 is invalid in glibc's WINDOWS-1252 to UTF-8 conversion.
+                body = (
+                    b"<!doctype html><html><head><title>ACW3</title></head>"
+                    b"<body><h1>ACW3 backend</h1><p>valid converted prefix</p>"
+                    b"\x81"
+                    b"</body></html>\n"
+                )
+            else:
+                body = SAMPLE_HTML.encode("utf-8")
+
+            self._send(body, f"text/html; charset={charset}")
             return
 
         self._send(SAMPLE_HTML.encode("utf-8"), "text/html; charset=utf-8")

@@ -1,0 +1,42 @@
+*   Trying 127.0.0.1:8080...
+* Established connection to 127.0.0.1 (127.0.0.1 port 8080) from 127.0.0.1 port 57724 
+* using HTTP/1.x
+* Server auth using Digest with user 'digestuser'
+> GET /digest/ HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/8.22.0
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 401 Unauthorized
+< Date: Mon, 26 Oct 2026 16:07:53 GMT
+< Server: Apache/2.4.68 (Unix)
+< WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="CgAAAAAAAAA=57a64bfede2ac452e90bc2d57554166944bb3495", algorithm=MD5, opaque="8", qop="auth"
+< Content-Length: 496
+< Content-Type: text/html; charset=iso-8859-1
+* Ignoring the response-body
+* setting size while ignoring
+< 
+* Connection #0 to host 127.0.0.1:8080 left intact
+* Issue another request to this URL: 'http://127.0.0.1:8080/digest/'
+* Reusing existing http: connection with host 127.0.0.1
+* Server auth using Digest with user 'digestuser'
+> GET /digest/ HTTP/1.1
+> Host: 127.0.0.1:8080
+> Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="CgAAAAAAAAA=57a64bfede2ac452e90bc2d57554166944bb3495", uri="/digest/", cnonce="f7MW1ADbxXsglEBF", nc=00000001, qop=auth, response="cb4b34bb5f701ccd9653854ccc135c58", opaque="8", algorithm=MD5
+> User-Agent: curl/8.22.0
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Date: Mon, 26 Oct 2026 16:07:53 GMT
+< Server: Apache/2.4.68 (Unix)
+< Authentication-Info: rspauth="9e79b731185cedba9e9e2af9bd0e1bc4", nextnonce="CwAAAAAAAAA=29ff20bc155e09965cc63db8b5ed7f6ce8dd12be", cnonce="f7MW1ADbxXsglEBF", nc=00000001, qop=auth
+< Last-Modified: Mon, 26 Oct 2026 16:06:42 GMT
+< ETag: "46-65ec084116af3"
+< Accept-Ranges: bytes
+< Content-Length: 70
+< Content-Type: text/html
+< 
+{ [70 bytes data]
+* Connection #0 to host 127.0.0.1:8080 left intact
