@@ -1,0 +1,42 @@
+*   Trying 127.0.0.1:8081...
+* Connected to 127.0.0.1 (127.0.0.1) port 8081
+* Server auth using Digest with user 'digestuser'
+> GET /digest/ HTTP/1.1
+> Host: 127.0.0.1:8081
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 401 Unauthorized
+< Date: Tue, 27 Oct 2026 11:58:42 GMT
+< Server: Apache
+< WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="AwAAAAAAAAA=032ba9829addb7cc7b00755d7dc22827124b31d9", algorithm=MD5, opaque="2", qop="auth"
+< Content-Length: 421
+< Content-Type: text/html; charset=iso-8859-1
+< 
+* Ignoring the response-body
+* Connection #0 to host 127.0.0.1 left intact
+* Issue another request to this URL: 'http://127.0.0.1:8081/digest/'
+* Found bundle for host: 0x872c40060 [serially]
+* Can not multiplex, even if we wanted to
+* Re-using existing connection with host 127.0.0.1
+* Server auth using Digest with user 'digestuser'
+> GET /digest/ HTTP/1.1
+> Host: 127.0.0.1:8081
+> Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="AwAAAAAAAAA=032ba9829addb7cc7b00755d7dc22827124b31d9", uri="/digest/", cnonce="MDhmYTYwOWM3NDdlODFlZTVmZDdlMjdlNDdmZDI2NDM=", nc=00000001, qop=auth, response="45ce38ae205f7e6843709c8db15fcd24", opaque="2", algorithm=MD5
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Date: Tue, 27 Oct 2026 11:58:42 GMT
+< Server: Apache
+< Authentication-Info: rspauth="b724aee54c92b265887e119dcef2e3d4", nextnonce="BAAAAAAAAAA=502151272b29fec24d6a2aaed6796c4b8e7c8f10", cnonce="MDhmYTYwOWM3NDdlODFlZTVmZDdlMjdlNDdmZDI2NDM=", nc=00000001, qop=auth
+< Last-Modified: Tue, 27 Oct 2026 11:57:44 GMT
+< ETag: "46-65ed12782eeab"
+< Accept-Ranges: bytes
+< Content-Length: 70
+< Content-Type: text/html
+< 
+{ [70 bytes data]
+* Connection #0 to host 127.0.0.1 left intact

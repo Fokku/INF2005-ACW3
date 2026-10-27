@@ -1,0 +1,16 @@
+acw3-target  | [Tue Oct 27 15:17:54.550788 2026] [auth_digest:info] [pid 20:tid 39] AH01766: gc'd 6 client entries. Total new clients: 108; Total removed clients: 108; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.600524 2026] [auth_digest:info] [pid 25:tid 88] AH01766: gc'd 6 client entries. Total new clients: 114; Total removed clients: 114; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.641383 2026] [auth_digest:info] [pid 25:tid 62] AH01766: gc'd 6 client entries. Total new clients: 120; Total removed clients: 120; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.681086 2026] [auth_digest:info] [pid 25:tid 85] AH01766: gc'd 6 client entries. Total new clients: 126; Total removed clients: 126; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.719742 2026] [auth_digest:info] [pid 25:tid 57] AH01766: gc'd 6 client entries. Total new clients: 132; Total removed clients: 132; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.757911 2026] [auth_digest:info] [pid 25:tid 79] AH01766: gc'd 6 client entries. Total new clients: 138; Total removed clients: 138; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.793173 2026] [auth_digest:info] [pid 25:tid 92] AH01766: gc'd 6 client entries. Total new clients: 144; Total removed clients: 144; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.829071 2026] [auth_digest:info] [pid 25:tid 73] AH01766: gc'd 6 client entries. Total new clients: 150; Total removed clients: 150; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.865855 2026] [auth_digest:info] [pid 25:tid 89] AH01766: gc'd 6 client entries. Total new clients: 156; Total removed clients: 156; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.902760 2026] [auth_digest:info] [pid 20:tid 49] AH01766: gc'd 6 client entries. Total new clients: 162; Total removed clients: 162; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.942055 2026] [auth_digest:info] [pid 25:tid 84] AH01766: gc'd 6 client entries. Total new clients: 168; Total removed clients: 168; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:54.978548 2026] [auth_digest:info] [pid 25:tid 95] AH01766: gc'd 6 client entries. Total new clients: 174; Total removed clients: 174; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:55.016301 2026] [auth_digest:info] [pid 25:tid 73] AH01766: gc'd 6 client entries. Total new clients: 180; Total removed clients: 180; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:55.055409 2026] [auth_digest:info] [pid 25:tid 89] AH01766: gc'd 6 client entries. Total new clients: 186; Total removed clients: 186; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:55.093785 2026] [auth_digest:info] [pid 25:tid 57] AH01766: gc'd 6 client entries. Total new clients: 192; Total removed clients: 192; Total renewed clients: 0
+acw3-target  | [Tue Oct 27 15:17:55.133883 2026] [auth_digest:info] [pid 25:tid 84] AH01766: gc'd 6 client entries. Total new clients: 198; Total removed clients: 198; Total renewed clients: 0

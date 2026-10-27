@@ -1,7 +1,7 @@
 HTTP/1.1 401 Unauthorized
-Date: Mon, 26 Oct 2026 16:07:53 GMT
+Date: Tue, 27 Oct 2026 15:14:41 GMT
 Server: Apache/2.4.68 (Unix)
-WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="DAAAAAAAAAA=e7109a72feb5b4f0c6fdffebaa6923ad78b37ba4", algorithm=MD5, opaque="8", stale=true, qop="auth"
+WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="cAAAAAAAAAA=cf7a6b52fb0187b2a5e1a9e7ff55ed858d307983", algorithm=MD5, opaque="6c", stale=true, qop="auth"
 Content-Length: 496
 Content-Type: text/html; charset=iso-8859-1
 
