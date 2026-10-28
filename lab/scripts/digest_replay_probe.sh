@@ -12,6 +12,10 @@ EXPECT_POST_STATUS="${EXPECT_POST_STATUS:-200}"
 
 mkdir -p "$EVIDENCE_DIR"
 
+# Record the start time BEFORE any requests are made
+START_TIME=$(docker exec "acw3-$SERVICE_NAME" date -u +"%Y-%m-%dT%H:%M:%SZ")
+echo "[*] Starting run at $START_TIME..."
+
 echo "[*] Capturing valid Digest header from $BASE_URL..."
 CAPTURE_STATUS=$(curl -sS -v --digest -u "$DIGEST_USER:$DIGEST_PASS" "$BASE_URL/digest/" \
   -o "$EVIDENCE_DIR/${LABEL}-initial-body.html" 2> "$EVIDENCE_DIR/${LABEL}-capture.txt" -w "%{http_code}")
@@ -29,7 +33,6 @@ if [ -z "$AUTH" ]; then
 fi
 printf '%s\n' "$AUTH" > "$EVIDENCE_DIR/${LABEL}-authorization.txt"
 
-# Save active configuration
 CONF_FILE="lab-vuln.conf"
 if [ "$SERVICE_NAME" == "target-patched" ]; then CONF_FILE="lab-hardened.conf"; fi
 docker exec "acw3-$SERVICE_NAME" grep -E "AuthDigestNonceLifetime|LogLevel" "/usr/local/apache2/conf/$CONF_FILE" > "$EVIDENCE_DIR/${LABEL}-active-config.txt" 2>/dev/null || true
@@ -46,16 +49,17 @@ fi
 echo "[+] Negative control returned 401."
 
 echo "[*] Triggering client-entry garbage collection ($GC_COUNT requests)..."
-# Capture start time for logs (using container time to ensure sync)
-START_TIME=$(docker exec "acw3-$SERVICE_NAME" date -u +"%Y-%m-%dT%H:%M:%SZ")
-
 for _ in $(seq 1 "$GC_COUNT"); do
   curl -sS -o /dev/null "$BASE_URL/digest/"
 done
 
-echo "[*] Verifying garbage collection occurred in logs..."
+echo "[*] Replaying identical captured header (Expecting $EXPECT_POST_STATUS)..."
+POST_STATUS=$(curl -sS -D "$EVIDENCE_DIR/${LABEL}-replay-headers.txt" \
+  -o "$EVIDENCE_DIR/${LABEL}-replay-body.txt" -w '%{http_code}' \
+  -H "$AUTH" "$BASE_URL/digest/")
+
+# Save the FULL log AFTER the replay is done
 sleep 2
-# Save full logs since START_TIME
 docker logs --since "$START_TIME" "acw3-$SERVICE_NAME" > "$EVIDENCE_DIR/${LABEL}-full-target.log" 2>&1 || true
 grep "gc'd" "$EVIDENCE_DIR/${LABEL}-full-target.log" > "$EVIDENCE_DIR/${LABEL}-gc.log" || true
 
@@ -64,12 +68,6 @@ if [ ! -s "$EVIDENCE_DIR/${LABEL}-gc.log" ]; then
     exit 3
 fi
 echo "[+] Garbage collection confirmed in logs."
-
-echo "[*] Replaying identical captured header (Expecting $EXPECT_POST_STATUS)..."
-POST_STATUS=$(curl -sS -D "$EVIDENCE_DIR/${LABEL}-replay-headers.txt" \
-  -o "$EVIDENCE_DIR/${LABEL}-replay-body.txt" -w '%{http_code}' \
-  -H "$AUTH" "$BASE_URL/digest/")
-
 echo "[+] Post-GC Replay Status: $POST_STATUS"
 
 if [ "$POST_STATUS" = "$EXPECT_POST_STATUS" ]; then
