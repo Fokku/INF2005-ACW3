@@ -3,23 +3,28 @@ CVE-2026-73636 Digest Replay Evidence
 (Note: Runbook labels this Scenario 1; Scaffold labels it Scenario 2. Both refer to this CVE. We follow the Runbook's Scenario 1 designation.)
 
 --- Vulnerable Target (Apache 2.4.68) ---
-1. Captured Request & Response: digest-vulnerable-capture.txt
-2. Immediate Control Headers (401): digest-vulnerable-control-headers.txt
-3. Immediate Control Body: digest-vulnerable-control-body.txt
-4. Full Server Logs (includes GC): digest-vulnerable-full-target.log
-5. Isolated GC Logs: digest-vulnerable-gc.log
-6. Replay Headers (200 OK): digest-vulnerable-replay-headers.txt
-7. Replay Body (Restricted Content): digest-vulnerable-replay-body.txt
-8. Active Config During Test: digest-vulnerable-active-config.txt
+1. Screenshot: vuln1-01-vulnerable-success.png
+2. Captured Request & Response: digest-vulnerable-capture.txt
+3. Immediate Control Headers (401): digest-vulnerable-control-headers.txt
+4. Immediate Control Body: digest-vulnerable-control-body.txt
+5. Full Server Logs (includes GC): digest-vulnerable-full-target.log
+6. Isolated GC Logs: digest-vulnerable-gc.log
+7. Replay Headers (200 OK): digest-vulnerable-replay-headers.txt
+8. Replay Body (Restricted Content): digest-vulnerable-replay-body.txt
+9. Active Config During Test: digest-vulnerable-active-config.txt
 
 --- Patched Target (Apache 2.4.69) ---
-1. Patched Version Proof: digest-patched-version.txt
-2. Captured Request & Response: digest-patched-capture.txt
-3. Immediate Control Headers (401): digest-patched-control-headers.txt
-4. Immediate Control Body: digest-patched-control-body.txt
-5. Full Server Logs (includes GC): digest-patched-full-target.log
-6. Isolated GC Logs: digest-patched-gc.log
-7. Replay Headers (401 Unauthorized): digest-patched-replay-headers.txt
-8. Replay Body (Denied): digest-patched-replay-body.txt
-9. Active Config During Test (lifetime 0): digest-patched-active-config.txt
-10. Cleanup Proof (restored to 300): digest-patched-cleanup-config.txt
+1. Screenshot: vuln1-02-patched-success.png
+2. Patched Version Proof: digest-patched-version.txt
+3. Captured Request & Response: digest-patched-capture.txt
+4. Immediate Control Headers (401): digest-patched-control-headers.txt
+5. Immediate Control Body: digest-patched-control-body.txt
+6. Full Server Logs (includes GC): digest-patched-full-target.log
+7. Isolated GC Logs: digest-patched-gc.log
+8. Replay Headers (401 Unauthorized): digest-patched-replay-headers.txt
+9. Replay Body (Denied): digest-patched-replay-body.txt
+10. Active Config During Test (lifetime 0): digest-patched-active-config.txt
+11. Cleanup Proof (restored to 300): digest-patched-cleanup-config.txt
+
+--- Final Lab State ---
+1. Final Reset and Verification Transcript: final-reset-verification.txt

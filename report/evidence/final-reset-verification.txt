@@ -1,0 +1,39 @@
+=== Final Reset and Verification Transcript ===
+Date: Wed Oct 28 16:51:34 UTC 2026
+Restarting vulnerable target...
+ Container acw3-target  Restarting
+ Container acw3-target  Started
+
+Running verify.sh...
+
+== Target reachability & version banner ==
+  Server: Apache/2.4.68 (Unix)
+  [ PASS ] target responds and is Apache
+  [ PASS ] version banner is 2.4.68
+
+== Assessed modules loaded (httpd -M -f conf/lab-vuln.conf inside acw3-target) ==
+  [ PASS ] module dav_module loaded
+  [ PASS ] module dav_fs_module loaded
+  [ PASS ] module auth_digest_module loaded
+  [ PASS ] module xml2enc_module loaded
+  [ PASS ] module proxy_html_module loaded
+
+== Scenario 1 - WebDAV reachable (CVE-2026-93546) ==
+  [ PASS ] OPTIONS advertises DAV capability
+  [ PASS ] authenticated PROPFIND returns 207 Multi-Status
+  [ PASS ] unauthenticated access is gated (401)
+
+== Scenario 2 - Digest auth reachable (CVE-2026-73636) ==
+  WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="AAAAAAAAAAA=abfe833d4fc9d5c7d81a562ca97d6a79ee3d05f0", algorithm=MD5, opaque="1", qop="auth"
+  [ PASS ] challenge is Digest (mod_auth_digest active)
+  [ PASS ] server issues a nonce
+  [ PASS ] valid digest credentials authenticate (200)
+
+== Scenario 3 - Proxy + xml2enc filter reachable (CVE-2026-63686) ==
+  [ PASS ] reverse proxy serves the backend through the filter chain
+
+== Summary ==
+  14 passed, 0 failed
+  Lab verified - ready for the exploitation phase.
+
+=== Final Verification Complete ===

@@ -8,32 +8,32 @@
 > 
 * Request completely sent off
 < HTTP/1.1 401 Unauthorized
-< Date: Wed, 28 Oct 2026 16:25:34 GMT
+< Date: Wed, 28 Oct 2026 16:51:01 GMT
 < Server: Apache/2.4.68 (Unix)
-< WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="AAAAAAAAAAA=f77e12717a21d3ef2633da90f3d62f170a1ea8d9", algorithm=MD5, opaque="1", qop="auth"
+< WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="AAAAAAAAAAA=7d09944fe592c4e5395721712d643a32367a38cc", algorithm=MD5, opaque="1", qop="auth"
 < Content-Length: 496
 < Content-Type: text/html; charset=iso-8859-1
 < 
 * Ignoring the response-body
 * Connection #0 to host 127.0.0.1 left intact
 * Issue another request to this URL: 'http://127.0.0.1:8080/digest/'
-* Found bundle for host: 0x742c3c0c0 [serially]
+* Found bundle for host: 0xaeac3c0c0 [serially]
 * Can not multiplex, even if we wanted to
 * Re-using existing connection with host 127.0.0.1
 * Server auth using Digest with user 'digestuser'
 > GET /digest/ HTTP/1.1
 > Host: 127.0.0.1:8080
-> Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="AAAAAAAAAAA=f77e12717a21d3ef2633da90f3d62f170a1ea8d9", uri="/digest/", cnonce="MjcyMWQ2Y2JhNjU0MjJhYWM1ODE1YzM3MzljMzc4ODk=", nc=00000001, qop=auth, response="ac00ea2d40ee65e642348ca0b09b9f2f", opaque="1", algorithm=MD5
+> Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="AAAAAAAAAAA=7d09944fe592c4e5395721712d643a32367a38cc", uri="/digest/", cnonce="OTQ5ZGI3N2ZkMDBiY2Q2MTk1ZDI2OWRjZWI3MTkyNTQ=", nc=00000001, qop=auth, response="88fb31af5c3302e8eff73e21e69cd451", opaque="1", algorithm=MD5
 > User-Agent: curl/8.7.1
 > Accept: */*
 > 
 * Request completely sent off
 < HTTP/1.1 200 OK
-< Date: Wed, 28 Oct 2026 16:25:34 GMT
+< Date: Wed, 28 Oct 2026 16:51:01 GMT
 < Server: Apache/2.4.68 (Unix)
-< Authentication-Info: rspauth="91c7d0f0441354be6a132802f8714fb1", nextnonce="AQAAAAAAAAA=e2a89e8ff9f49d8823c465e00d1c8bacfc36bb9e", cnonce="MjcyMWQ2Y2JhNjU0MjJhYWM1ODE1YzM3MzljMzc4ODk=", nc=00000001, qop=auth
-< Last-Modified: Wed, 28 Oct 2026 16:25:34 GMT
-< ETag: W/"46-65ee903349d62"
+< Authentication-Info: rspauth="d10e66720e9014298f370bd92c3ca9da", nextnonce="AQAAAAAAAAA=47a4fd725f0054a853f1cd9674aea7d0c5c47bd0", cnonce="OTQ5ZGI3N2ZkMDBiY2Q2MTk1ZDI2OWRjZWI3MTkyNTQ=", nc=00000001, qop=auth
+< Last-Modified: Wed, 28 Oct 2026 16:51:01 GMT
+< ETag: W/"46-65ee95e38f581"
 < Accept-Ranges: bytes
 < Content-Length: 70
 < Content-Type: text/html
