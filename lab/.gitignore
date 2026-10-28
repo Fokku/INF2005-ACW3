@@ -1,0 +1,7 @@
+
+# Allow ACW3 evidence logs
+!report/evidence/*.log
+
+# Allow ACW3 evidence logs
+!report/evidence/*.log
+!report/evidence/*.txt

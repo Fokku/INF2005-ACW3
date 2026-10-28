@@ -11,3 +11,6 @@ report/screenshots/
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Allow ACW3 evidence logs
+!report/evidence/*.log

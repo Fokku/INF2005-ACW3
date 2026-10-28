@@ -1,0 +1,15 @@
+acw3-target  | [entrypoint] httpd 2.4.68  config=lab-vuln.conf
+acw3-target  | Syntax OK
+acw3-target  | [entrypoint] starting: httpd -D FOREGROUND -f conf/lab-vuln.conf
+acw3-target  | [Tue Oct 27 08:48:09.732370 2026] [mpm_event:notice] [pid 1:tid 1] AH00489: Apache/2.4.68 (Unix) configured -- resuming normal operations
+acw3-target  | [Tue Oct 27 08:48:09.733048 2026] [mpm_event:info] [pid 1:tid 1] AH00490: Server built: Oct 26 2026 23:33:17
+acw3-target  | [Tue Oct 27 08:48:09.733085 2026] [core:notice] [pid 1:tid 1] AH00094: Command line: '/usr/local/apache2/bin/httpd -f /usr/local/apache2/conf/lab-vuln.conf -D FOREGROUND'
+acw3-target  | common
+acw3-target  | common
+acw3-target  | common
+acw3-target  | common
+acw3-target  | common
+acw3-target  | common
+acw3-target  | common
+acw3-target  | [Tue Oct 27 08:48:13.178377 2026] [xml2enc:info] [pid 25:tid 68] [client 172.30.0.1:56526] AH01431: Got charset utf-8 from HTTP headers
+acw3-target  | common
