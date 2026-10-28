@@ -63,16 +63,39 @@ class Handler(BaseHTTPRequestHandler):
             charset = "".join(
                 c for c in charset if c.isalnum() or c in "-_."
             )[:40] or "utf-8"
+            mode = qs.get("mode", ["benign"])[0]
 
-            if qs.get("mode", ["benign"])[0] == "partial-fail":
-                # ASCII/Windows-1252-compatible prefix converts first.
-                # 0x81 is invalid in glibc's WINDOWS-1252 to UTF-8 conversion.
+            if mode == "partial-fail":
                 body = (
                     b"<!doctype html><html><head><title>ACW3</title></head>"
                     b"<body><h1>ACW3 backend</h1><p>valid converted prefix</p>"
                     b"\x81"
                     b"</body></html>\n"
                 )
+            elif mode == "bad-body":
+                try:
+                    lead = int(qs.get("byte", ["0x82"])[0], 16)
+                except ValueError:
+                    lead = 0x82
+                try:
+                    size = int(qs.get("size", ["0"])[0])
+                except ValueError:
+                    size = 0
+                position = qs.get("pos", ["mid"])[0]
+                if position == "end":
+                    body = (
+                        b"<!doctype html><html><body>"
+                        + b"A" * size
+                        + bytes([lead])
+                    )
+                else:
+                    body = (
+                        b"<!doctype html><html><body>"
+                        + b"A" * size
+                        + bytes([lead])
+                        + b"B" * size
+                        + b"</body></html>"
+                    )
             else:
                 body = SAMPLE_HTML.encode("utf-8")
 
