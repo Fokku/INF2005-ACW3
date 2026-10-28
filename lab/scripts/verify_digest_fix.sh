@@ -5,14 +5,30 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EVIDENCE_DIR="../report/evidence"
 CONF_PATH="/usr/local/apache2/conf/lab-hardened.conf"
 BACKUP_PATH="/tmp/hardened.bak"
+BACKUP_CREATED=false
 
-# Guarantee cleanup happens even if the script crashes or is interrupted
+# Guarantee cleanup happens safely
 cleanup() {
-    echo "[*] Restoring original hardened configuration..."
-    docker exec acw3-target-patched cp "$BACKUP_PATH" "$CONF_PATH" 2>/dev/null || true
-    docker restart acw3-target-patched > /dev/null
-    docker exec acw3-target-patched grep "AuthDigestNonceLifetime" "$CONF_PATH" > "$EVIDENCE_DIR/digest-patched-cleanup-config.txt" 2>/dev/null || true
-    echo "[+] Cleanup complete. Config restored."
+    local orig_exit=$?
+    if [ "$BACKUP_CREATED" = "true" ]; then
+        echo "[*] Restoring original hardened configuration..."
+        if ! docker exec acw3-target-patched cp "$BACKUP_PATH" "$CONF_PATH"; then
+            echo "[-] ERROR: Failed to restore configuration from backup." >&2
+            exit 1
+        fi
+        docker restart acw3-target-patched > /dev/null
+        
+        # Verify restoration
+        if ! docker exec acw3-target-patched grep -q "AuthDigestNonceLifetime 300" "$CONF_PATH"; then
+            echo "[-] ERROR: Restoration verification failed. Nonce lifetime is not 300." >&2
+            exit 1
+        fi
+        docker exec acw3-target-patched grep "AuthDigestNonceLifetime" "$CONF_PATH" > "$EVIDENCE_DIR/digest-patched-cleanup-config.txt" 2>/dev/null || true
+        echo "[+] Cleanup complete. Config verified restored."
+    else
+        echo "[*] No backup was created this run. Skipping cleanup."
+    fi
+    exit $orig_exit
 }
 trap cleanup EXIT
 
@@ -28,6 +44,7 @@ fi
 
 echo "[*] Backing up current configuration and applying patch-only test config..."
 docker exec acw3-target-patched cp "$CONF_PATH" "$BACKUP_PATH"
+BACKUP_CREATED=true
 docker exec acw3-target-patched sed -i 's/^LogLevel.*/LogLevel warn auth_digest:info/' "$CONF_PATH"
 docker exec acw3-target-patched sed -i 's/AuthDigestNonceLifetime 300/AuthDigestNonceLifetime 0/' "$CONF_PATH"
 
