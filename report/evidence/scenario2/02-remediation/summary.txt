@@ -1,4 +1,4 @@
-Scenario 2 (CVE-2026-63686) — REMEDIATION run 2026-10-28T11:22:57Z
+Scenario 2 (CVE-2026-63686) — REMEDIATION run 2026-10-28T11:42:14Z
 
 Target:   Apache 2.4.69 (acw3-target-patched, :8081)
 Trigger:  charset=big5&mode=bad-body&byte=0xa4&pos=end&size=0
@@ -9,8 +9,8 @@ Results:
   patch-only (ProxyHTMLEnable On):   SAFE
 
 Evidence integrity:
-  hardened/server.log    1593 bytes  24 lines  sha256=4d00ae381022e1558f7a605bff4c1281550682fbd777460ba80fb1e284ccd31a
-  patch-only/server.log  2164 bytes  33 lines  sha256=50eec726401cd9f23fdf94471ca253f014764117315dfbe432a2034d2b36c6ce
+  hardened/server.log    458 bytes  7 lines  sha256=c07c9aff7a1a661ee1f4859b60c5619bac64dd120b7e18446e06e6a08063edbe
+  patch-only/server.log  1029 bytes  16 lines  sha256=f6f7e9131ef232bc9a716aed4a90b5927d7ae7f21cbb969c3a7322bd12e5e962
   patch-only/skip-lines.txt  sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
 Key files:
