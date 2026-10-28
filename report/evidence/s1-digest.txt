@@ -3,7 +3,7 @@ CVE-2026-73636 Digest Replay Evidence
 (Note: Runbook labels this Scenario 1; Scaffold labels it Scenario 2. Both refer to this CVE. We follow the Runbook's Scenario 1 designation.)
 
 --- Vulnerable Target (Apache 2.4.68) ---
-1. Screenshot: vuln1-01-vulnerable-success.png
+1. Screenshot: screenshots/vuln1-01-vulnerable-success.jpg
 2. Captured Request & Response: digest-vulnerable-capture.txt
 3. Immediate Control Headers (401): digest-vulnerable-control-headers.txt
 4. Immediate Control Body: digest-vulnerable-control-body.txt
@@ -14,7 +14,7 @@ CVE-2026-73636 Digest Replay Evidence
 9. Active Config During Test: digest-vulnerable-active-config.txt
 
 --- Patched Target (Apache 2.4.69) ---
-1. Screenshot: vuln1-02-patched-success.png
+1. Screenshot: screenshots/vuln1-02-patched-success.jpg
 2. Patched Version Proof: digest-patched-version.txt
 3. Captured Request & Response: digest-patched-capture.txt
 4. Immediate Control Headers (401): digest-patched-control-headers.txt
@@ -25,6 +25,7 @@ CVE-2026-73636 Digest Replay Evidence
 9. Replay Body (Denied): digest-patched-replay-body.txt
 10. Active Config During Test (lifetime 0): digest-patched-active-config.txt
 11. Cleanup Proof (restored to 300): digest-patched-cleanup-config.txt
+12. Server Log Screenshot (GC and unknown client entry): screenshots/vuln1-03-patched-logs.jpg
 
 --- Final Lab State ---
 1. Final Reset and Verification Transcript: final-reset-verification.txt
