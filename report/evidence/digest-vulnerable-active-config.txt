@@ -1,0 +1,4 @@
+#   LogLevel info dav:debug dav_fs:debug auth_digest:debug proxy_html:debug xml2enc:debug
+LogLevel  info
+# AuthDigestNonceLifetime 0 is the vulnerable setting: it is meant to make each
+    AuthDigestNonceLifetime 0

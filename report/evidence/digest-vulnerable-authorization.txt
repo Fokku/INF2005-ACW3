@@ -1,0 +1,1 @@
+Authorization: Digest username="digestuser", realm="ACW3 Restricted", nonce="AAAAAAAAAAA=f77e12717a21d3ef2633da90f3d62f170a1ea8d9", uri="/digest/", cnonce="MjcyMWQ2Y2JhNjU0MjJhYWM1ODE1YzM3MzljMzc4ODk=", nc=00000001, qop=auth, response="ac00ea2d40ee65e642348ca0b09b9f2f", opaque="1", algorithm=MD5

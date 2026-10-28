@@ -1,0 +1,311 @@
+[Wed Oct 28 16:25:34.167750 2026] [core:info] [pid 1:tid 1] AH00096: removed PID file /usr/local/apache2/logs/httpd.pid (pid=1)
+[Wed Oct 28 16:25:34.167836 2026] [mpm_event:notice] [pid 1:tid 1] AH00491: caught SIGTERM, shutting down
+[entrypoint] httpd 2.4.68  config=lab-vuln.conf
+Syntax OK
+[entrypoint] starting: httpd -D FOREGROUND -f conf/lab-vuln.conf
+[Wed Oct 28 16:25:34.464660 2026] [mpm_event:notice] [pid 1:tid 1] AH00489: Apache/2.4.68 (Unix) configured -- resuming normal operations
+[Wed Oct 28 16:25:34.464762 2026] [mpm_event:info] [pid 1:tid 1] AH00490: Server built: Oct 28 2026 11:55:51
+[Wed Oct 28 16:25:34.464767 2026] [core:notice] [pid 1:tid 1] AH00094: Command line: '/usr/local/apache2/bin/httpd -f /usr/local/apache2/conf/lab-vuln.conf -D FOREGROUND'
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - digestuser [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 200 70
+[Wed Oct 28 16:25:34.627529 2026] [auth_digest:info] [pid 18:tid 37] [client 172.30.0.1:55394] AH01779: user digestuser: one-time-nonce mismatch - sending new nonce
+172.30.0.1 - digestuser [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.694464 2026] [auth_digest:info] [pid 18:tid 80] AH01766: gc'd 6 client entries. Total new clients: 6; Total removed clients: 6; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.740192 2026] [auth_digest:info] [pid 18:tid 94] AH01766: gc'd 6 client entries. Total new clients: 12; Total removed clients: 12; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.785386 2026] [auth_digest:info] [pid 18:tid 73] AH01766: gc'd 6 client entries. Total new clients: 18; Total removed clients: 18; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.826242 2026] [auth_digest:info] [pid 18:tid 93] AH01766: gc'd 6 client entries. Total new clients: 24; Total removed clients: 24; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.870170 2026] [auth_digest:info] [pid 16:tid 48] AH01766: gc'd 6 client entries. Total new clients: 30; Total removed clients: 30; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.916426 2026] [auth_digest:info] [pid 18:tid 88] AH01766: gc'd 6 client entries. Total new clients: 36; Total removed clients: 36; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:34.963861 2026] [auth_digest:info] [pid 18:tid 49] AH01766: gc'd 6 client entries. Total new clients: 42; Total removed clients: 42; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:34 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.014209 2026] [auth_digest:info] [pid 18:tid 87] AH01766: gc'd 6 client entries. Total new clients: 48; Total removed clients: 48; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.065484 2026] [auth_digest:info] [pid 18:tid 37] AH01766: gc'd 6 client entries. Total new clients: 54; Total removed clients: 54; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.114453 2026] [auth_digest:info] [pid 18:tid 86] AH01766: gc'd 6 client entries. Total new clients: 60; Total removed clients: 60; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.172633 2026] [auth_digest:info] [pid 18:tid 96] AH01766: gc'd 6 client entries. Total new clients: 66; Total removed clients: 66; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.231185 2026] [auth_digest:info] [pid 18:tid 73] AH01766: gc'd 6 client entries. Total new clients: 72; Total removed clients: 72; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.295532 2026] [auth_digest:info] [pid 18:tid 87] AH01766: gc'd 6 client entries. Total new clients: 78; Total removed clients: 78; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.340650 2026] [auth_digest:info] [pid 18:tid 37] AH01766: gc'd 6 client entries. Total new clients: 84; Total removed clients: 84; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.379321 2026] [auth_digest:info] [pid 18:tid 86] AH01766: gc'd 6 client entries. Total new clients: 90; Total removed clients: 90; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.421715 2026] [auth_digest:info] [pid 18:tid 96] AH01766: gc'd 6 client entries. Total new clients: 96; Total removed clients: 96; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.460874 2026] [auth_digest:info] [pid 18:tid 78] AH01766: gc'd 6 client entries. Total new clients: 102; Total removed clients: 102; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.500343 2026] [auth_digest:info] [pid 18:tid 95] AH01766: gc'd 6 client entries. Total new clients: 108; Total removed clients: 108; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.545045 2026] [auth_digest:info] [pid 18:tid 69] AH01766: gc'd 6 client entries. Total new clients: 114; Total removed clients: 114; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.593785 2026] [auth_digest:info] [pid 18:tid 90] AH01766: gc'd 6 client entries. Total new clients: 120; Total removed clients: 120; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.643353 2026] [auth_digest:info] [pid 18:tid 49] AH01766: gc'd 6 client entries. Total new clients: 126; Total removed clients: 126; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.714521 2026] [auth_digest:info] [pid 18:tid 83] AH01766: gc'd 6 client entries. Total new clients: 132; Total removed clients: 132; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.774632 2026] [auth_digest:info] [pid 18:tid 97] AH01766: gc'd 6 client entries. Total new clients: 138; Total removed clients: 138; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.832908 2026] [auth_digest:info] [pid 18:tid 80] AH01766: gc'd 6 client entries. Total new clients: 144; Total removed clients: 144; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.893925 2026] [auth_digest:info] [pid 18:tid 96] AH01766: gc'd 6 client entries. Total new clients: 150; Total removed clients: 150; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:35.948963 2026] [auth_digest:info] [pid 18:tid 46] AH01766: gc'd 6 client entries. Total new clients: 156; Total removed clients: 156; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:35 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.008969 2026] [auth_digest:info] [pid 18:tid 87] AH01766: gc'd 6 client entries. Total new clients: 162; Total removed clients: 162; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.059963 2026] [auth_digest:info] [pid 18:tid 37] AH01766: gc'd 6 client entries. Total new clients: 168; Total removed clients: 168; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.108592 2026] [auth_digest:info] [pid 18:tid 86] AH01766: gc'd 6 client entries. Total new clients: 174; Total removed clients: 174; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.158474 2026] [auth_digest:info] [pid 18:tid 98] AH01766: gc'd 6 client entries. Total new clients: 180; Total removed clients: 180; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.210090 2026] [auth_digest:info] [pid 16:tid 36] AH01766: gc'd 6 client entries. Total new clients: 186; Total removed clients: 186; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.292400 2026] [auth_digest:info] [pid 18:tid 91] AH01766: gc'd 6 client entries. Total new clients: 192; Total removed clients: 192; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.347898 2026] [auth_digest:info] [pid 18:tid 53] AH01766: gc'd 6 client entries. Total new clients: 198; Total removed clients: 198; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.393512 2026] [auth_digest:info] [pid 18:tid 88] AH01766: gc'd 6 client entries. Total new clients: 204; Total removed clients: 204; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.437372 2026] [auth_digest:info] [pid 18:tid 98] AH01766: gc'd 6 client entries. Total new clients: 210; Total removed clients: 210; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.479069 2026] [auth_digest:info] [pid 18:tid 78] AH01766: gc'd 6 client entries. Total new clients: 216; Total removed clients: 216; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.529557 2026] [auth_digest:info] [pid 16:tid 66] AH01766: gc'd 6 client entries. Total new clients: 222; Total removed clients: 222; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.590733 2026] [auth_digest:info] [pid 18:tid 53] AH01766: gc'd 6 client entries. Total new clients: 228; Total removed clients: 228; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.650298 2026] [auth_digest:info] [pid 18:tid 80] AH01766: gc'd 6 client entries. Total new clients: 234; Total removed clients: 234; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.706964 2026] [auth_digest:info] [pid 18:tid 94] AH01766: gc'd 6 client entries. Total new clients: 240; Total removed clients: 240; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.765747 2026] [auth_digest:info] [pid 18:tid 73] AH01766: gc'd 6 client entries. Total new clients: 246; Total removed clients: 246; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+[Wed Oct 28 16:25:36.815387 2026] [auth_digest:info] [pid 18:tid 93] AH01766: gc'd 6 client entries. Total new clients: 252; Total removed clients: 252; Total renewed clients: 0
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - - [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 401 496
+172.30.0.1 - digestuser [28/Oct/2026:16:25:36 +0000] "GET /digest/ HTTP/1.1" 200 70

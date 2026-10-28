@@ -1,0 +1,2 @@
+LogLevel warn auth_digest:info
+    AuthDigestNonceLifetime 0
