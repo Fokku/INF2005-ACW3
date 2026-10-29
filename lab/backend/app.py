@@ -73,6 +73,13 @@ class Handler(BaseHTTPRequestHandler):
                     b"\x81"
                     b"</body></html>\n"
                 )
+            elif qs.get("mode", ["benign"])[0] == "incomplete-fail":
+        
+                body = (
+                    b"<!doctype html><html><head><title>ACW3</title></head>"
+                    b"<body><h1>ACW3 backend</h1><p>valid converted prefix</p>"
+                    b"\x81"
+                )
             else:
                 body = SAMPLE_HTML.encode("utf-8")
 
