@@ -1,0 +1,49 @@
+# Scenario 2 — CVE-2026-63686 · mod_xml2enc conversion-failure DoS
+# FIX VERIFICATION — target: http://127.0.0.1:8081/proxy/   (2026-11-01 ~07:00 UTC)
+# Remediation under test: httpd upgraded 2.4.68 -> 2.4.69, plus the config-level
+# mitigation ProxyHTMLEnable Off (lab/target/conf/lab-hardened.conf), served by
+# the `target-patched` Docker Compose service (profile `remediation`).
+#
+# This replays the EXACT SAME trigger that crashed the 2.4.68 target in
+# s2-xml2enc.txt (declared charset=gbk, body ending on a bare 0x81 incomplete
+# GBK lead byte) against the remediated target, via
+# lab/scripts/verify-fix-xml2enc.sh.
+
+## Precondition: target-patched running the patched release with the hardened config
+$ docker exec acw3-target-patched httpd -v
+Server version: Apache/2.4.69 (Unix)
+  => httpd binary reports 2.4.69 (patched release)                          PASS
+
+$ docker exec acw3-target-patched grep -i ProxyHTMLEnable /usr/local/apache2/conf/lab-hardened.conf
+  ProxyHTMLEnable  Off
+  => config-level mitigation present (ProxyHTMLEnable Off)                  PASS
+
+## Control: proxy still serves the backend (filter path healthy)
+$ curl 'http://127.0.0.1:8081/proxy/scenario?charset=windows-1252&mode=benign'
+  HTTP status: 200
+  body contains 'ACW3 backend': yes
+  => control request succeeds through the proxy                            PASS / PASS
+
+## Replay trigger: charset=gbk, body ends on an incomplete GBK lead byte (0x81)
+$ curl -v 'http://127.0.0.1:8081/proxy/scenario?charset=gbk&mode=incomplete-fail'
+  client curl exit code: 0
+  container identity before trigger: 0 2026-11-01T06:59:18.628592462Z
+  container identity after trigger:  0 2026-11-01T06:59:18.628592462Z
+  (restart count unchanged, master process start time unchanged)
+
+## Server-side evidence (segfault/AH00052 is the DoS proof; a 5xx alone is not)
+worker-crash indicators in target-patched log (segfault/AH00052): 0
+  => no segfault/AH00052 in the log                                        PASS
+  => container restart count / master start time unchanged                PASS
+
+target reachable immediately after replay: 200
+  => target-patched still serving requests after the replay                PASS
+
+## Verdict
+  => CVE-2026-63686 does NOT reproduce on target-patched (2.4.69,
+     lab-hardened.conf). Both the primary remediation (upgrade to 2.4.69)
+     and the config-level mitigation (ProxyHTMLEnable Off) are confirmed in
+     effect; the same trigger that crashed the 2.4.68 target in s2-xml2enc.txt
+     produces no crash here.
+
+  7 passed, 0 failed  (lab/scripts/verify-fix-xml2enc.sh)
