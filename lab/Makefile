@@ -2,7 +2,7 @@
 # `docker compose` (v2) is assumed; swap to `docker-compose` if you run v1.
 DC = docker compose
 
-.PHONY: help build up down verify verify-patched logs attacker remediation clean
+.PHONY: help build up down verify verify-patched verify-fix-xml2enc logs attacker remediation clean
 
 help:
 	@echo "make build        - build target(2.4.68), backend, attacker images"
@@ -10,6 +10,8 @@ help:
 	@echo "make verify       - confirm each vuln is present & reachable (:8080)"
 	@echo "make remediation  - also start the patched target (2.4.69, :8081)"
 	@echo "make verify-patched - run checks against the patched target"
+	@echo "make verify-fix-xml2enc - replay the CVE-2026-63686 trigger against the"
+	@echo "                    patched target (:8081) and confirm no crash"
 	@echo "make attacker     - shell into the Kali attacker box"
 	@echo "make logs         - follow the target's httpd logs"
 	@echo "make down / clean - stop / stop and remove images+volumes"
@@ -30,6 +32,9 @@ remediation:
 
 verify-patched:
 	TARGET=http://127.0.0.1:8081 CONTAINER=acw3-target-patched EXPECT_VERSION=2.4.69 ./scripts/verify.sh
+
+verify-fix-xml2enc:
+	TARGET=http://127.0.0.1:8081 CONTAINER=acw3-target-patched EXPECT_VERSION=2.4.69 ./scripts/verify-fix-xml2enc.sh
 
 attacker:
 	$(DC) exec attacker bash
