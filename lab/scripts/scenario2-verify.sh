@@ -1,11 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Scenario 2 (CVE-2026-63686) — VERIFY.
-# Runs exploit + remediate, asserts evidence, writes capture-transcript.txt
-# with every full log + sha256. This is the one command you run for the report.
+# ============================================================================
+# Scenario 2 — VERIFICATION SCRIPT (CVE-2026-63686)
+# ============================================================================
 #
-# Usage: ./scripts/scenario2-verify.sh [--print]
+# PURPOSE:
+#   This is the ONE COMMAND you run to produce all evidence for the report.
+#   It calls the exploit script and the remediation script in sequence, then
+#   validates that all evidence files exist and contain the expected content,
+#   and generates a tamper-proof transcript with SHA-256 hashes of every file.
+#
+# WHAT IT DOES:
+#   1. Runs scenario2-exploit.sh    → crashes Apache 2.4.68 (proves vuln exists)
+#   2. Runs scenario2-remediate.sh  → shows 2.4.69 handles it safely (proves fix)
+#   3. Asserts all evidence files are present and correct:
+#      - Exploit log contains AH00052 (the crash)
+#      - Hardened log has no crash
+#      - Patch-only log has no crash but shows filter engagement (AH0144x)
+#   4. Generates capture-transcript.txt with every file's content + SHA-256 hash
+#   5. Prints a VERIFIED verdict with all hashes
+#
+# WHY SHA-256 HASHES:
+#   The hashes prove the evidence files haven't been modified after capture.
+#   If a professor re-runs the script, they get fresh hashes they can compare.
+#
+# USAGE:
+#   ./scripts/scenario2-verify.sh            # normal run
+#   ./scripts/scenario2-verify.sh --print    # also dump full logs to terminal
+# ============================================================================
 
 PRINT_LOGS=0
 for arg in "$@"; do
@@ -35,6 +58,7 @@ sha() { shasum -a 256 "$1" | cut -d' ' -f1; }
 siz() { wc -c < "$1" | tr -d ' '; }
 lin() { wc -l < "$1" | tr -d ' '; }
 
+# --- STEP 0: Ensure all required containers are running ---
 step "0. Checking containers"
 docker ps --format '{{.Names}}' | grep -qx acw3-target \
     || fail "acw3-target not running — docker compose up -d"
@@ -44,6 +68,7 @@ docker ps --format '{{.Names}}' | grep -qx acw3-backend \
     || fail "acw3-backend not running"
 ok "all containers up"
 
+# --- STEP 1: Run the exploit script (should crash Apache 2.4.68) ---
 step "1. Exploit half (expect crash on 2.4.68)"
 if [ "$PRINT_LOGS" -eq 1 ]; then
     ./scripts/scenario2-exploit.sh --print
@@ -51,6 +76,7 @@ else
     ./scripts/scenario2-exploit.sh
 fi
 
+# --- STEP 2: Run the remediation script (should NOT crash Apache 2.4.69) ---
 step "2. Remediation half (expect safe on 2.4.69)"
 if [ "$PRINT_LOGS" -eq 1 ]; then
     ./scripts/scenario2-remediate.sh --print
@@ -58,8 +84,12 @@ else
     ./scripts/scenario2-remediate.sh
 fi
 
+# --- STEP 3: Validate all evidence files ---
+# These assertions ensure the exploit and remediation produced the expected
+# results. If any assertion fails, the script stops with an error message.
 step "3. Asserting evidence files"
 
+# EXPLOIT evidence: must have a server log containing a crash (AH00052/SIGSEGV)
 [ -s "$EX/server.log" ]    || fail "01-exploit/server.log missing or empty"
 [ -s "$EX/client.txt" ]    || fail "01-exploit/client.txt missing or empty"
 [ -s "$EX/crash-lines.txt" ] \
@@ -68,11 +98,14 @@ grep -qE 'AH00052|SIGSEGV' "$EX/crash-lines.txt" \
     || fail "01-exploit/crash-lines.txt does not contain AH00052/SIGSEGV"
 ok "vulnerable: full log + crash evidence (AH00052 SIGSEGV)"
 
+# HARDENED evidence: must have a server log with NO crash
 [ ! -s "$HARD/crash-lines.txt" ] \
     || fail "hardened/crash-lines.txt exists — hardened target crashed"
 [ -s "$HARD/server.log" ]   || fail "hardened/server.log missing"
 ok "hardened: full log present, no crash"
 
+# PATCH-ONLY evidence: must have a server log with NO crash, but WITH filter
+# engagement (AH0144x means mod_xml2enc saw the bad input but handled it safely)
 [ ! -s "$PO/crash-lines.txt" ] \
     || fail "patch-only/crash-lines.txt exists — patch-only target crashed"
 [ -s "$PO/server.log" ]     || fail "patch-only/server.log missing"
@@ -81,6 +114,10 @@ grep -qE 'AH0144[0-9]' "$PO/skip-lines.txt" \
     || fail "patch-only/skip-lines.txt missing AH0144x — 2.4.69 did not see the bad input"
 ok "patch-only: full log present, filter engaged (AH0144x), no crash"
 
+# --- STEP 4: Generate the evidence transcript ---
+# This creates a single file containing every evidence file's content with
+# line numbers, plus its size and SHA-256 hash. This is the master record
+# that proves the evidence is complete and unmodified.
 step "4. Capturing transcript with hashes"
 
 FILES=(
@@ -131,6 +168,9 @@ printf '    size:   %s bytes\n' "$(siz "$TRANSCRIPT")"
 printf '    lines:  %s\n' "$(lin "$TRANSCRIPT")"
 printf '    sha256: %s\n' "$(sha "$TRANSCRIPT")"
 
+# --- STEP 5: Print the final verdict ---
+# Summarises all three test results and the integrity hashes.
+# "VERIFIED" means: exploit reproduced on 2.4.68, fixed on 2.4.69.
 step "5. Verdict"
 {
     printf 'Scenario 2 (CVE-2026-63686) — VERIFIED %s\n\n' "$(date -u +%FT%TZ)"

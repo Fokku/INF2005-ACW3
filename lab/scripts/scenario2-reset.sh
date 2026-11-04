@@ -1,8 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Scenario 2 — full reset and rerun.
-# Flags: --hard (full --no-cache rebuild)
+# ============================================================================
+# Scenario 2 — RESET SCRIPT (CVE-2026-63686)
+# ============================================================================
+#
+# PURPOSE:
+#   Tears down all containers, rebuilds everything from scratch, and reruns
+#   the full exploit + remediation pipeline. Use this if something goes wrong
+#   or you want a completely fresh run of the evidence capture.
+#
+# WHAT IT DOES:
+#   1. Stops and removes all containers and volumes
+#   2. Rebuilds all Docker images (use --hard for --no-cache full rebuild)
+#   3. Starts all containers (target, backend, attacker, patched)
+#   4. Runs scenario2-exploit.sh (crashes 2.4.68)
+#   5. Runs scenario2-remediate.sh (proves 2.4.69 is safe)
+#
+# FLAGS:
+#   --hard   full --no-cache rebuild (slower but guarantees clean images)
+#
+# USAGE:
+#   ./scripts/scenario2-reset.sh          # cached rebuild + rerun
+#   ./scripts/scenario2-reset.sh --hard   # full clean rebuild + rerun
+# ============================================================================
 
 HARD=0
 for arg in "$@"; do
