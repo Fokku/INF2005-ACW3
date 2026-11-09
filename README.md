@@ -154,6 +154,3 @@ were produced by its pair.
 | Wen Xuan + Ke Ying | [CVE-2026-63686](https://www.cve.org/CVERecord?id=CVE-2026-63686) `mod_xml2enc`, High, CVSS 7.5 (`CVE-2026-63686-`) | Build the target; confirm the exploit manually; write the exploit script | Apply the fix; write the fix-verification script; write the report subsection |
 | Ridwan + Kai Yuan | [CVE-2026-93546](https://www.cve.org/CVERecord?id=CVE-2026-93546) `mod_dav_fs`, High, CVSS 8.8 (`cve-2026-93546`) | Build the target; confirm the exploit manually; write the exploit script | Apply the fix; write the fix-verification script; write the report subsection |
 | Kannan + Zong Han | [CVE-2026-73636](https://www.cve.org/CVERecord?id=CVE-2026-73636) `mod_auth_digest`, High, CVSS 8.1 (`kannon/cve-2026-73636-digest-evidence`) | Build the target; confirm the exploit manually; write the exploit script | Apply the fix; write the fix-verification script; write the report subsection |
-
-See [`docs/05-timeline-and-roles.md`](docs/05-timeline-and-roles.md) for the
-full timeline, milestones, and demo-day logistics.
